@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Broadcast API</title>
+</head>
+
+<body>
+  <h1>Broadcast API</h1>
+  <button>send message</button>
+  <a href="tab1.html" target="_blank">Tab 1</a>
+  <a href="tab2.html" target="_blank">Tab 2</a>
+  <iframe src="ifram.html" frameborder="0" name="Receiver frame" title="Receiver frame"></iframe>
+</body>
+<script>
+  const toPChannel = new BroadcastChannel('toPChannel')
+  const pChannel = new BroadcastChannel('pChannel')
+  document.querySelector('button').addEventListener('click', () => {
+    pChannel.postMessage('new button')
+  })
+  toPChannel.onmessage = (e) => {
+    console.log(e)
+    const message = document.createElement('p')
+    message.textContent = `received: ${e.data}`;
+    document.body.append(message)
+  }
+</script>
+
+</html>

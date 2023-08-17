@@ -1,0 +1,1 @@
+JavaScript is a backend and frontend language. It's use both side fo website.

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event loop and web worker</title>
+  <style>
+    #nums,
+    #prime-nums {
+      /* word-wrap: break-word; */
+    }
+  </style>
+</head>
+
+<body>
+  <p id="nums"></p>
+  <button type="button" id="show-prime">show prime nums</button>
+  <p id="prime-nums"></p>
+  <script>
+    const numsElem = document.getElementById('nums')
+    const btn = document.getElementById('show-prime')
+    const primeNums = document.getElementById("prime-nums")
+    function printNums(range) {
+      // numsElem.textContent = 0
+      for (let i = 1; i <= range; i++) {
+        // nums += i;
+        setInterval(() => {
+        }, 500)
+        numsElem.textContent += i + ",";
+      }
+    }
+    printNums(1000)
+    function printPrimeNums(range) {
+      primeNums.textContent = 0;
+      for (let i = 0; i < range; i++) {
+        if (i % 2 == 0) continue;
+        primeNums.textContent += i + ","
+      }
+    }
+    btn.addEventListener('click', function () {
+      printPrimeNums(1000)
+    })
+  </script>
+</body>
+
+</html>

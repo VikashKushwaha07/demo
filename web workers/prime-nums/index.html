@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>Prime Number Calculator</h1>
+  <!-- <button onclick="startCalculation()">Start Calculation</button> -->
+  <p id="result">Results will be displayed here.</p>
+  <script>
+    function startCalculation() {
+      const worker = new Worker('worker.js');
+      console.log("from main thread up")
+      worker.onmessage = function (event) {
+        const primes = event.data;
+        displayPrimes(primes);
+      };
+
+      worker.postMessage({ start: 1, end: 10000 });
+      console.log("from main thread down")
+    }
+
+    function displayPrimes(primes) {
+      const resultElement = document.getElementById('result');
+      resultElement.textContent = 'Primes: ' + primes.join(', ');
+    }
+    const startTime = performance.now();
+    startCalculation()
+    const endTime = performance.now()
+    // Calculate the execution time in milliseconds
+    const executionTime = endTime - startTime;
+
+    console.log('Execution time:', executionTime, 'milliseconds');
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fibonacci Numbers</title>
+</head>
+
+<body>
+  <h1>Get n<sup>th</sup> fibonacci number</h1>
+  <form action="">
+    <label for="number"></label>
+    <input type="text" name="number" id="number" placeholder="10">
+    <button type="submit">get num</button>
+  </form>
+  <p>Result will be here show...</p>
+  <ol>
+    <li><strong><a href="/en-US/docs/Web/API/Web_Workers_API">Web Workers API</a></strong></li>
+    <li><strong><a href="/en-US/docs/Web/API/Worker"><code>Worker</code></a></strong></li>
+    <li class="toggle">
+      <details>
+        <summary>Constructor</summary>
+        <ol>
+          <li><em><code>Worker()</code> </em></li>
+        </ol>
+      </details>
+    </li>
+    <li class="toggle">
+      <details open="">
+        <summary>Instance methods</summary>
+        <ol>
+          <li><a href="/en-US/docs/Web/API/Worker/postMessage"><code>postMessage()</code></a></li>
+          <li><a href="/en-US/docs/Web/API/Worker/terminate"><code>terminate()</code></a></li>
+        </ol>
+      </details>
+    </li>
+    <li class="toggle">
+      <details open="">
+        <summary>Events</summary>
+        <ol>
+          <li><a href="/en-US/docs/Web/API/Worker/error_event"><code>error</code></a></li>
+          <li><a href="/en-US/docs/Web/API/Worker/message_event"><code>message</code></a></li>
+          <li><a href="/en-US/docs/Web/API/Worker/messageerror_event"><code>messageerror</code></a></li>
+        </ol>
+      </details>
+    </li>
+    <li class="toggle">
+      <details open="">
+        <summary>Inheritance:</summary>
+        <ol>
+          <li><a href="/en-US/docs/Web/API/EventTarget"><code>EventTarget</code></a></li>
+        </ol>
+      </details>
+    </li>
+    <li class="toggle">
+      <details open="false">
+        <summary>Related pages for Web Workers API</summary>
+        <ol>
+          <li><a href="/en-US/docs/Web/API/DedicatedWorkerGlobalScope"><code>DedicatedWorkerGlobalScope</code></a></li>
+          <li><a href="/en-US/docs/Web/API/ServiceWorker"><code>ServiceWorker</code></a></li>
+          <li><a href="/en-US/docs/Web/API/SharedWorker"><code>SharedWorker</code></a></li>
+          <li><a href="/en-US/docs/Web/API/SharedWorkerGlobalScope"><code>SharedWorkerGlobalScope</code></a></li>
+          <li><a href="/en-US/docs/Web/API/WorkerGlobalScope"><code>WorkerGlobalScope</code></a></li>
+          <li><a href="/en-US/docs/Web/API/WorkerLocation"><code>WorkerLocation</code></a></li>
+          <li><a href="/en-US/docs/Web/API/WorkerNavigator"><code>WorkerNavigator</code></a></li>
+        </ol>
+      </details>
+    </li>
+  </ol>
+</body>
+<script>
+  const form = document.querySelector('form')
+  function getFibonacciNum(e) {
+    e.preventDefault()
+    const input = form.querySelector('input');
+    // console.log(input.value)
+    const worker = new Worker('worker.js');
+    worker.onmessage = event => {
+      const { n, result } = event.data
+      showNum(n, result)
+    }
+    worker.postMessage({ nthNum: input.value })
+  }
+  function showNum(position, rst) {
+    const p = document.querySelector('p')
+    p.innerHTML = `${position}<sup>th</sup> Fibonacci number is ${rst}`
+  }
+  form.addEventListener('submit', getFibonacciNum)
+</script>
+
+</html>

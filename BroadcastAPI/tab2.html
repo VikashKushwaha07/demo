@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Broadcast Channel API Receiver</title>
+</head>
+
+<body>
+  <div id="messageContainer"></div>
+
+  <script>
+    const messageContainer = document.getElementById('messageContainer');
+    const channel = new BroadcastChannel('my-channel');
+
+    channel.addEventListener('message', (event) => {
+      const message = event.data;
+      const messageElement = document.createElement('p');
+      messageElement.textContent = `Received: ${message}`;
+      messageContainer.appendChild(messageElement);
+    });
+  </script>
+</body>
+
+</html>

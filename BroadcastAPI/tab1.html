@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Broadcast Channel API Sender</title>
+</head>
+
+<body>
+  <button id="sendButton">Send Message</button>
+
+  <script>
+    document.getElementById('sendButton').addEventListener('click', () => {
+      const channel = new BroadcastChannel('my-channel');
+      channel.postMessage('Hello from sender!');
+    });
+  </script>
+</body>
+
+</html>
